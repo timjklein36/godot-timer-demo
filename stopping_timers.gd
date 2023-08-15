@@ -10,7 +10,7 @@ enum TIMERS {
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	%Timer2.paused = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -68,12 +68,15 @@ func _on_timer_1_timeout():
 	%Timer1.paused = true
 	
 	%Timer2.paused = false
-	
-	if %Timer2.is_stopped():
-		%Timer2.start()
 
 
 func _on_timer_2_timeout():
 	%Timer2.paused = true
+	%Timer2.stop()
 	
 	%Timer1.paused = false
+
+
+func _on_timer_2_start_button_pressed():
+	if %Timer2.is_stopped() and not %Timer2.paused:
+		%Timer2.start()
